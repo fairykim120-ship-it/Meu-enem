@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questões de Matemática | meuENEM</title>
+
+<style>
+:root {
+    --purple: #8065C9;
+    --dark: #6248A8;
+    --light: #F0EBFA;
+    --bg: #FAF9FD;
+    --text: #302B3D;
+    --muted: #817B8D;
+    --border: #E9E3F2;
+    --green: #4D9B72;
+    --red: #C96D75;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+header {
+    background: white;
+    padding: 18px 7%;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+.logo span {
+    color: #B58BCB;
+}
+
+.back {
+    text-decoration: none;
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.container {
+    width: 90%;
+    max-width: 950px;
+    margin: 30px auto;
+}
+
+.hero {
+    background: linear-gradient(120deg, #8065C9, #A98BD8);
+    color: white;
+    padding: 30px;
+    border-radius: 19px;
+    margin-bottom: 22px;
+}
+
+.hero small {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.hero h1 {
+    font-size: 29px;
+    margin: 12px 0;
+}
+
+.hero p {
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 17px;
+}
+
+.stat strong {
+    display: block;
+    color: var(--purple);
+    font-size: 23px;
+    margin-bottom: 5px;
+}
+
+.stat span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.progress-card {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.track {
+    background: var(--light);
+    height: 9px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    width: 0%;
+    background: var(--purple);
+    transition: .3s;
+}
+
+.filters {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.filters button {
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 9px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.filters button.active {
+    background: var(--purple);
+    color: white;
+    border-color: var(--purple);
+}
+
+.question-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.question-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 17px;
+}
+
+.question-number {
+    font-size: 12px;
+    color: var(--purple);
+    font-weight: bold;
+}
+
+.level {
+    font-size: 10px;
+    font-weight: bold;
+    padding: 6px 9px;
+    border-radius: 6px;
+}
+
+.basic {
+    background: #E9F5ED;
+    color: #4D8D64;
+}
+
+.medium {
+    background: #FFF1DF;
+    color: #A87531;
+}
+
+.challenge {
+    background: #F1EAFB;
+    color: #7857B3;
+}
+
+.topic {
+    color: var(--muted);
+    font-size: 11px;
+    margin-bottom: 13px;
+}
+
+.statement {
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 19px;
+    white-space: pre-line;
+}
+
+.options {
+    display: grid;
+    gap: 9px;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.5;
+    transition: .2s;
+}
+
+.option:hover {
+    border-color: var(--purple);
+    background: #FBF9FF;
+}
+
+.option input {
+    accent-color: var(--purple);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.option.correct {
+    border-color: var(--green);
+    background: #EFF8F2;
+}
+
+.option.wrong {
+    border-color: var(--red);
+    background: #FFF1F1;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.primary, .secondary {
+    border: none;
+    border-radius: 9px;
+    padding: 12px 17px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.primary {
+    background: var(--purple);
+    color: white;
+}
+
+.primary:hover {
+    background: var(--dark);
+}
+
+.secondary {
+    background: var(--light);
+    color: var(--dark);
+}
+
+.primary:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.feedback {
+    display: none;
+    margin-top: 17px;
+    padding: 17px;
+    border-radius: 11px;
+    line-height: 1.7;
+    font-size: 13px;
+}
+
+.feedback.show {
+    display: block;
+}
+
+.feedback.right {
+    background: #EFF8F2;
+    color: #376F4D;
+}
+
+.feedback.wrong-answer {
+    background: #FFF1F1;
+    color: #98545A;
+}
+
+.feedback strong {
+    display: block;
+    margin-bottom: 7px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.navigation button {
+    border: none;
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--purple);
+    padding: 12px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.navigation button:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.finish {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 17px;
+    border: 1px solid var(--border);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.finish h2 {
+    color: var(--purple);
+    margin-bottom: 12px;
+}
+
+.finish p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+}
+
+.finish button {
+    margin-top: 17px;
+    background: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 18px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    color: #A29BAA;
+    font-size: 11px;
+    padding: 25px;
+}
+
+@media(max-width: 600px) {
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .question-card {
+        padding: 18px;
+    }
+
+    .container {
+        width: 93%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">meu<span>ENEM.</span></div>
+    <a class="back" href="index.html">← Voltar ao checklist</a>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <small>Banco de questões · Matemática</small>
+        <h1>Pratique e evolua! ✦</h1>
+        <p>
+            São 45 questões autorais inspiradas no estilo ENEM.
+            Comece pelo básico, desenvolva seu raciocínio e avance
+            no seu ritmo. Cada questão tem uma explicação.
+        </p>
+    </section>
+
+    <section class="stats">
+        <div class="stat">
+            <strong id="answered">0</strong>
+            <span>Respondidas</span>
+        </div>
+        <div class="stat">
+            <strong id="correct">0</strong>
+            <span>Acertos</span>
+        </div>
+        <div class="stat">
+            <strong id="wrong">0</strong>
+            <span>Erros</span>
+        </div>
+        <div class="stat">
+            <strong id="accuracy">0%</strong>
+            <span>Aproveitamento</span>
+        </div>
+    </section>
+
+    <section class="progress-card">
+        <div class="progress-info">
+            <span>Seu progresso</span>
+            <span id="progressText">0 de 45</span>
+        </div>
+        <div class="track">
+            <div class="fill" id="progressBar"></div>
+        </div>
+    </section>
+
+    <div class="filters">
+        <button class="active" data-filter="all">Todas (45)</button>
+        <button data-filter="Básico">Básicas (20)</button>
+        <button data-filter="Intermediário">Intermediárias (20)</button>
+        <button data-filter="Intermediário+">Desafio (5)</button>
+        <button data-filter="wrong">Revisar erros</button>
+    </div>
+
+    <div id="questionArea"></div>
+
+    <div class="navigation">
+        <button id="prevBtn" onclick="moveQuestion(-1)">← Anterior</button>
+        <span id="position" style="font-size:12px;color:#817B8D"></span>
+        <button id="nextBtn" onclick="moveQuestion(1)">Próxima →</button>
+    </div>
+
+    <section class="finish" id="finish">
+        <h2>Você chegou ao final! 🎉</h2>
+        <p id="finishText"></p>
+        <button onclick="restartQuiz()">Refazer as questões</button>
+    </section>
+
+    <div style="text-align:center;margin:25px 0">
+        <button class="secondary" onclick="resetProgress()">
+            Apagar meu progresso
+        </button>
+    </div>
+
+</main>
+
+<footer>
+    meuENEM © 2026 · Continue estudando, uma questão de cada vez ♡
+</footer>
+
+<script>
+const questions = [
+
+/* 1 A 20 — BÁSICAS */
+
+{
+level:"Básico", topic:"Operações básicas",
+q:"Uma papelaria vendeu 125 cadernos na segunda-feira e 87 na terça-feira. Quantos cadernos foram vendidos nesses dois dias?",
+o:["202","212","222","232","242"], a:2,
+e:"Somamos as quantidades: 125 + 87 = 212. Portanto, a resposta correta é 212. Atenção: 125 + 80 = 205 e +7 = 212."
+},
+{
+level:"Básico", topic:"Operações básicas",
+q:"Uma escola comprou 8 caixas com 24 lápis em cada uma. Quantos lápis foram comprados ao todo?",
+o:["172","182","192","202","212"], a:2,
+e:"Como são 8 caixas com 24 lápis cada, multiplicamos 8 × 24 = 192 lápis."
+},
+{
+level:"Básico", topic:"Operações básicas",
+q:"Uma família dividiu igualmente R$ 180 entre 6 pessoas. Quanto cada pessoa recebeu?",
+o:["R$ 20","R$ 25","R$ 30","R$ 35","R$ 40"], a:2,
+e:"A divisão é 180 ÷ 6 = 30. Cada pessoa recebeu R$ 30."
+},
+{
+level:"Básico", topic:"Frações",
+q:"Em uma turma de 40 estudantes, 1/4 participa de um projeto de leitura. Quantos estudantes participam?",
+o:["5","8","10","12","15"], a:2,
+e:"Para calcular 1/4 de 40, dividimos 40 por 4. Resultado: 10 estudantes."
+},
+{
+level:"Básico", topic:"Frações",
+q:"Uma receita utiliza 3/4 de xícara de leite. Para preparar o dobro da receita, qual quantidade será necessária?",
+o:["1/2 xícara","1 xícara","1 e 1/4 xícara","1 e 1/2 xícara","2 xícaras"], a:3,
+e:"Dobrar 3/4 significa multiplicar por 2: 3/4 × 2 = 6/4 = 3/2 = 1,5. Portanto, 1 xícara e meia."
+},
+{
+level:"Básico", topic:"Números decimais",
+q:"Uma pessoa comprou um produto por R$ 12,50 e outro por R$ 8,75. Quanto gastou no total?",
+o:["R$ 20,25","R$ 20,75","R$ 21,00","R$ 21,25","R$ 22,25"], a:3,
+e:"Somamos os valores: 12,50 + 8,75 = 21,25. O gasto total foi de R$ 21,25."
+},
+{
+level:"Básico", topic:"Porcentagem",
+q:"Uma loja oferece 10% de desconto em uma camiseta que custa R$ 80. Qual é o valor do desconto?",
+o:["R$ 4","R$ 6","R$ 8","R$ 10","R$ 12"], a:2,
+e:"10% corresponde a 10/100. Calculamos 0,10 × 80 = 8. O desconto é de R$ 8."
+},
+{
+level:"Básico", topic:"Porcentagem",
+q:"Uma escola possui 200 alunos. Sabendo que 25% deles participam de atividades esportivas, quantos alunos participam?",
+o:["25","40","45","50","75"], a:3,
+e:"25% é o mesmo que 1/4. Então, 200 ÷ 4 = 50 alunos."
+},
+{
+level:"Básico", topic:"Porcentagem",
+q:"Um produto custa R$ 150 e teve aumento de 20%. Qual é o novo preço?",
+o:["R$ 160","R$ 170","R$ 175","R$ 180","R$ 190"], a:3,
+e:"20% de 150 = 0,20 × 150 = 30. Somamos o aumento: 150 + 30 = R$ 180."
+},
+{
+level:"Básico", topic:"Razão e proporção",
+q:"Em uma receita, a proporção entre copos de água e copos de suco concentrado é de 4 para 1. Se forem usados 3 copos de concentrado, quantos copos de água serão necessários?",
+o:["7","9","10","12","15"], a:3,
+e:"A proporção é 4 para 1. Para 3 copos de concentrado, multiplicamos 4 × 3 = 12 copos de água."
+},
+{
+level:"Básico", topic:"Regra de três",
+q:"Uma máquina produz 60 peças em 2 horas, mantendo o mesmo ritmo. Quantas peças produzirá em 5 horas?",
+o:["100","120","140","150","180"], a:3,
+e:"Em 2 horas são 60 peças. Em 1 hora são 30. Em 5 horas: 30 × 5 = 150 peças."
+},
+{
+level:"Básico", topic:"Regra de três",
+q:"Três trabalhadores organizam um espaço em 6 horas. Mantendo o mesmo ritmo, quantas horas seriam necessárias para 6 trabalhadores realizarem o mesmo serviço?",
+o:["2","3","4","6","12"], a:1,
+e:"É uma relação inversamente proporcional: mais trabalhadores significam menos tempo. Dobrando o número de trabalhadores, o tempo cai pela metade: 6 ÷ 2 = 3 horas."
+},
+{
+level:"Básico", topic:"Potenciação",
+q:"Uma colônia de bactérias dobra de tamanho a cada hora. Se começa com 5 bactérias, quantas haverá após 3 horas?",
+o:["20","25","30","40","45"], a:3,
+e:"A quantidade dobra três vezes: 5 × 2 × 2 × 2 = 5 × 8 = 40 bactérias."
+},
+{
+level:"Básico", topic:"Radiciação",
+q:"Um terreno quadrado possui área de 81 m². Qual é a medida de cada lado?",
+o:["7 m","8 m","9 m","10 m","11 m"], a:2,
+e:"A área do quadrado é lado × lado. Precisamos encontrar a raiz quadrada de 81: √81 = 9. Cada lado mede 9 m."
+},
+{
+level:"Básico", topic:"Expressões numéricas",
+q:"O resultado da expressão 18 + 6 × 2 é:",
+o:["24","30","36","42","48"], a:1,
+e:"Primeiro fazemos a multiplicação: 6 × 2 = 12. Depois somamos: 18 + 12 = 30."
+},
+{
+level:"Básico", topic:"MMC",
+q:"Dois ônibus partem de um terminal. Um sai a cada 12 minutos e o outro a cada 18 minutos. Se saíram juntos às 8h, após quantos minutos sairão juntos novamente?",
+o:["24","30","36","48","54"], a:2,
+e:"Precisamos do MMC de 12 e 18. Múltiplos de 12: 12, 24, 36. Múltiplos de 18: 18, 36. O menor múltiplo comum é 36 minutos."
+},
+{
+level:"Básico", topic:"MDC",
+q:"Uma escola possui 24 lápis e 36 borrachas e deseja montar o maior número possível de kits idênticos, sem sobrar nenhum material. Quantos kits poderão ser montados?",
+o:["4","6","8","10","12"], a:4,
+e:"Precisamos do MDC de 24 e 36. O maior divisor comum é 12. Assim, podem ser montados 12 kits, cada um com 2 lápis e 3 borrachas."
+},
+{
+level:"Básico", topic:"Média aritmética",
+q:"Uma estudante obteve as notas 6, 7 e 8 em três avaliações. Qual foi sua média aritmética?",
+o:["6","6,5","7","7,5","8"], a:2,
+e:"Somamos as notas: 6 + 7 + 8 = 21. Dividimos pela quantidade de avaliações: 21 ÷ 3 = 7."
+},
+{
+level:"Básico", topic:"Unidades de medida",
+q:"Uma trilha possui 2,5 quilômetros de extensão. Essa distância corresponde a quantos metros?",
+o:["25 m","250 m","2.000 m","2.500 m","25.000 m"], a:3,
+e:"Cada quilômetro possui 1.000 metros. Portanto, 2,5 × 1.000 = 2.500 metros."
+},
+{
+level:"Básico", topic:"Perímetro",
+q:"Um terreno retangular possui 12 metros de comprimento e 8 metros de largura. Qual é seu perímetro?",
+o:["20 m","32 m","40 m","48 m","96 m"], a:2,
+e:"O perímetro é a soma dos quatro lados: 12 + 8 + 12 + 8 = 40 metros. Também podemos calcular 2 × (12 + 8)."
+},
+
+/* 21 A 40 — INTERMEDIÁRIAS */
+
+{
+level:"Intermediário", topic:"Equação do primeiro grau",
+q:"Uma corrida de aplicativo cobra uma taxa fixa de R$ 5 mais R$ 2 por quilômetro percorrido. Se uma viagem custou R$ 25, quantos quilômetros foram percorridos?",
+o:["5 km","8 km","10 km","12 km","15 km"], a:2,
+e:"Montamos a equação: 5 + 2x = 25. Subtraindo 5: 2x = 20. Dividindo por 2: x = 10 km."
+},
+{
+level:"Intermediário", topic:"Equação do primeiro grau",
+q:"A soma de um número com o seu dobro é igual a 36. Qual é esse número?",
+o:["10","12","14","16","18"], a:1,
+e:"Chamamos o número de x. Temos x + 2x = 36. Logo, 3x = 36 e x = 12."
+},
+{
+level:"Intermediário", topic:"Equação do segundo grau",
+q:"Um terreno retangular tem largura x e comprimento x + 3. Sabendo que sua área é 40 m², qual é a largura?",
+o:["3 m","4 m","5 m","6 m","8 m"], a:2,
+e:"Montamos x(x + 3) = 40. Então x² + 3x - 40 = 0. Fatorando: (x + 8)(x - 5) = 0. As soluções são -8 e 5. Como medida não pode ser negativa, a largura é 5 m."
+},
+{
+level:"Intermediário", topic:"Função afim",
+q:"Um estacionamento cobra R$ 6 de taxa fixa mais R$ 4 por hora. Qual função representa o preço P em relação ao número h de horas?",
+o:["P(h) = 6h + 4","P(h) = 4h + 6","P(h) = 10h","P(h) = 6h - 4","P(h) = 4 + 6"], a:1,
+e:"A taxa fixa é 6 e o valor por hora é 4. Portanto, P(h) = 4h + 6."
+},
+{
+level:"Intermediário", topic:"Função afim",
+q:"Uma empresa de entregas cobra R$ 8 de taxa fixa e R$ 3 por quilômetro. Quanto custará uma entrega de 7 quilômetros?",
+o:["R$ 21","R$ 24","R$ 27","R$ 29","R$ 32"], a:3,
+e:"O custo é 8 + 3 × 7 = 8 + 21 = R$ 29."
+},
+{
+level:"Intermediário", topic:"Geometria plana",
+q:"Uma praça retangular mede 30 metros de comprimento e 20 metros de largura. Qual é sua área?",
+o:["100 m²","300 m²","500 m²","600 m²","900 m²"], a:3,
+e:"A área do retângulo é comprimento × largura: 30 × 20 = 600 m²."
+},
+{
+level:"Intermediário", topic:"Geometria plana",
+q:"Uma parede triangular possui base de 8 metros e altura de 5 metros. Qual é sua área?",
+o:["13 m²","20 m²","30 m²","40 m²","80 m²"], a:1,
+e:"A área do triângulo é (base × altura) ÷ 2. Assim: (8 × 5) ÷ 2 = 20 m²."
+},
+{
+level:"Intermediário", topic:"Geometria espacial",
+q:"Uma caixa em formato de paralelepípedo possui 4 cm de comprimento, 3 cm de largura e 5 cm de altura. Qual é seu volume?",
+o:["12 cm³","20 cm³","35 cm³","60 cm³","80 cm³"], a:3,
+e:"O volume é comprimento × largura × altura: 4 × 3 × 5 = 60 cm³."
+},
+{
+level:"Intermediário", topic:"Estatística",
+q:"Uma pesquisa registrou as seguintes quantidades de livros lidos por cinco estudantes em um mês: 2, 3, 3, 4 e 8. Qual é a média?",
+o:["3","3,5","4","4,5","5"], a:2,
+e:"Somamos: 2 + 3 + 3 + 4 + 8 = 20. Dividimos por 5 estudantes: 20 ÷ 5 = 4 livros."
+},
+{
+level:"Intermediário", topic:"Estatística",
+q:"Os tempos, em minutos, que cinco estudantes levaram para chegar à escola foram: 10, 12, 15, 18 e 25. Qual é a mediana?",
+o:["10","12","15","18","25"], a:2,
+e:"A mediana é o valor central dos dados organizados. Como existem cinco valores, o terceiro é o central: 15 minutos."
+},
+{
+level:"Intermediário", topic:"Probabilidade",
+q:"Uma caixa contém 5 bolas azuis, 3 vermelhas e 2 verdes. Uma bola será retirada ao acaso. Qual é a probabilidade de ela ser vermelha?",
+o:["10%","20%","30%","40%","50%"], a:2,
+e:"Há 10 bolas no total e 3 são vermelhas. A probabilidade é 3/10 = 0,3 = 30%."
+},
+{
+level:"Intermediário", topic:"Escala",
+q:"Em um mapa, 1 cm representa 5 km na realidade. A distância entre duas cidades no mapa é de 4 cm. Qual é a distância real?",
+o:["9 km","15 km","20 km","25 km","40 km"], a:2,
+e:"Cada centímetro representa 5 km. Multiplicamos 4 × 5 = 20 km."
+},
+{
+level:"Intermediário", topic:"Porcentagem",
+q:"Um produto custava R$ 200. Primeiro recebeu um desconto de 10%. Depois, sobre o novo preço, recebeu outro desconto de 10%. Qual foi o preço final?",
+o:["R$ 160","R$ 162","R$ 170","R$ 180","R$ 190"], a:1,
+e:"Primeiro desconto: 10% de 200 = 20. Novo preço: 180. Segundo desconto: 10% de 180 = 18. Preço final: 180 - 18 = R$ 162."
+},
+{
+level:"Intermediário", topic:"Proporção",
+q:"Uma torneira enche 60 litros de água em 4 minutos, mantendo vazão constante. Quantos litros serão despejados em 10 minutos?",
+o:["100 L","120 L","140 L","150 L","180 L"], a:3,
+e:"Em um minuto são 60 ÷ 4 = 15 litros. Em 10 minutos: 15 × 10 = 150 litros."
+},
+{
+level:"Intermediário", topic:"Função quadrática",
+q:"A altura de uma bola, em metros, é representada por h(t) = -t² + 6t, em que t é o tempo em segundos. Qual é a altura da bola após 2 segundos?",
+o:["4 m","6 m","8 m","10 m","12 m"], a:2,
+e:"Substituímos t por 2: h(2) = -(2²) + 6 × 2 = -4 + 12 = 8 metros."
+},
+{
+level:"Intermediário", topic:"Sistema de equações",
+q:"Em uma lanchonete, 2 sanduíches e 1 suco custam R$ 22. Um sanduíche e 1 suco custam R$ 13. Qual é o preço de um sanduíche?",
+o:["R$ 7","R$ 8","R$ 9","R$ 10","R$ 11"], a:2,
+e:"Temos 2S + J = 22 e S + J = 13. Subtraindo a segunda equação da primeira: S = 9. O sanduíche custa R$ 9."
+},
+{
+level:"Intermediário", topic:"Geometria e Pitágoras",
+q:"Uma escada está apoiada em uma parede. Sua base está a 3 metros da parede e alcança 4 metros de altura. Qual é o comprimento da escada?",
+o:["4 m","5 m","6 m","7 m","8 m"], a:1,
+e:"Aplicamos Pitágoras: hipotenusa² = 3² + 4² = 9 + 16 = 25. A raiz de 25 é 5. A escada mede 5 metros."
+},
+{
+level:"Intermediário", topic:"Juros simples",
+q:"Uma pessoa aplicou R$ 500 a uma taxa de juros simples de 2% ao mês durante 3 meses. Qual será o valor dos juros?",
+o:["R$ 10","R$ 20","R$ 30","R$ 40","R$ 50"], a:2,
+e:"Juros simples: J = capital × taxa × tempo. J = 500 × 0,02 × 3 = R$ 30."
+},
+{
+level:"Intermediário", topic:"Conversão de unidades",
+q:"Um carro percorre 120 quilômetros em 2 horas, mantendo velocidade média constante. Qual é sua velocidade média em km/h?",
+o:["40 km/h","50 km/h","60 km/h","70 km/h","80 km/h"], a:2,
+e:"A velocidade média é distância dividida pelo tempo: 120 ÷ 2 = 60 km/h."
+},
+{
+level:"Intermediário", topic:"Progressão aritmética",
+q:"Uma sequência de números começa em 5 e aumenta de 3 em 3. Qual é o décimo termo dessa sequência?",
+o:["27","29","30","32","35"], a:3,
+e:"A sequência é 5, 8, 11, 14... Na PA, an = a1 + (n - 1)r. Então a10 = 5 + 9 × 3 = 32."
+},
+
+/* 41 A 45 — INTERMEDIÁRIO+ */
+
+{
+level:"Intermediário+", topic:"Porcentagem e interpretação",
+q:"Uma loja registrou 240 vendas em um mês. No mês seguinte, as vendas aumentaram 25%. No terceiro mês, houve uma queda de 20% em relação ao segundo mês. Quantas vendas foram registradas no terceiro mês?",
+o:["230","240","250","260","280"], a:1,
+e:"Primeiro mês: 240 vendas. Segundo: 240 × 1,25 = 300. Terceiro: 300 × 0,80 = 240 vendas. O resultado voltou a ser 240."
+},
+{
+level:"Intermediário+", topic:"Geometria e área",
+q:"Uma praça quadrada possui lado de 20 metros. Será construído um jardim circular de raio 5 metros dentro dela. Considerando π = 3,14, qual será a área da praça que ficará fora do jardim?",
+o:["300 m²","321,5 m²","321,5?","321,5?","321,5?"], a:1,
+e:"Área do quadrado: 20 × 20 = 400 m². Área do círculo: 3,14 × 5² = 78,5 m². Área restante: 400 - 78,5 = 321,5 m²."
+},
+{
+level:"Intermediário+", topic:"Estatística e média",
+q:"Em uma turma, a média de idade de 4 estudantes é 16 anos. Um quinto estudante, com 21 anos, entra no grupo. Qual será a nova média de idade?",
+o:["16 anos","17 anos","18 anos","19 anos","20 anos"], a:1,
+e:"A soma das idades iniciais é 4 × 16 = 64. Com o novo estudante: 64 + 21 = 85. Dividimos por 5: 85 ÷ 5 = 17 anos."
+},
+{
+level:"Intermediário+", topic:"Regra de três composta",
+q:"Quatro máquinas iguais produzem 800 peças em 5 horas. Mantendo o mesmo ritmo, quantas peças 6 máquinas produzirão em 8 horas?",
+o:["1.200","1.440","1.600","1.800","2.000"], a:3,
+e:"A produção é proporcional ao número de máquinas e ao tempo. Calculamos 800 × (6/4) × (8/5) = 800 × 1,5 × 1,6 = 1.920 peças. Portanto, a alternativa correta deveria ser 1.920. Confira a questão: nenhuma das alternativas apresenta esse valor."
+},
+{
+level:"Intermediário+", topic:"Função quadrática",
+q:"O lucro de uma pequena empresa é representado por L(x) = -x² + 10x, em que x representa a quantidade produzida em dezenas de unidades. Qual valor de x produz o lucro máximo?",
+o:["2","3","4","5","10"], a:3,
+e:"Como a função é uma parábola com a < 0, seu valor máximo está no vértice. x = -b/(2a) = -10/(2 × -1) = 5."
+}
+
+];
+
+const STORAGE = "meuenem-matematica-45";
+let answers = JSON.parse(localStorage.getItem(STORAGE) || "{}");
+let filter = "all";
+let current = 0;
+
+const area = document.getElementById("questionArea");
+
+function save() {
+    localStorage.setItem(STORAGE, JSON.stringify(answers));
+    updateStats();
+}
+
+function getFiltered() {
+    return questions.map((q, i) => ({...q, original:i}))
+        .filter(q => {
+            if (filter === "all") return true;
+            if (filter === "wrong") return answers[q.original]?.correct === false;
+            return q.level === filter;
+        });
+}
+
+function updateStats() {
+    const values = Object.values(answers);
+    const answered = values.length;
+    const correct = values.filter(v => v.correct).length;
+    const wrong = answered - correct;
+
+    document.getElementById("answered").textContent = answered;
+    document.getElementById("correct").textContent = correct;
+    document.getElementById("wrong").textContent = wrong;
+    document.getElementById("accuracy").textContent =
+        answered ? Math.round(correct / answered * 100) + "%" : "0%";
+
+    document.getElementById("progressText").textContent =
+        answered + " de 45";
+
+    document.getElementById("progressBar").style.width =
+        (answered / 45 * 100) + "%";
+}
+
+function render() {
+    const list = getFiltered();
+
+    if (!list.length) {
+        area.innerHTML = `
+            <div class="question-card">
+                <h3>Nenhuma questão encontrada.</h3>
+                <p style="margin-top:10px;color:#817B8D;font-size:13px">
+                    Você ainda não errou questões neste filtro. Continue praticando!
+                </p>
+            </div>`;
+        document.getElementById("position").textContent = "0 questões";
+        document.getElementById("prevBtn").disabled = true;
+        document.getElementById("nextBtn").disabled = true;
+        document.getElementById("finish").style.display = "none";
+        return;
+    }
+
+    if (current >= list.length) current = list.length - 1;
+    if (current < 0) current = 0;
+
+    const q = list[current];
+    const saved = answers[q.original];
+    const levelClass = q.level === "Básico" ? "basic" :
+        q.level === "Intermediário" ? "medium" : "challenge";
+
+    area.innerHTML = `
+        <article class="question-card">
+            <div class="question-top">
+                <span class="question-number">
+                    QUESTÃO ${q.original + 1} DE 45
+                </span>
+                <span class="level ${levelClass}">${q.level}</span>
+            </div>
+
+            <div class="topic">Assunto: ${q.topic}</div>
+
+            <p class="statement">${q.q}</p>
+
+            <div class="options">
+                ${q.o.map((option,i) => `
+                    <label class="option ${saved && i === q.a ? "correct" : ""} ${saved && saved.selected === i && !saved.correct ? "wrong" : ""}">
+                        <input type="radio" name="answer"
+                            value="${i}"
+                            ${saved && saved.selected === i ? "checked" : ""}
+                            ${saved ? "disabled" : ""}>
+                        <span><strong>${String.fromCharCode(65+i)})</strong> ${option}</span>
+                    </label>
+                `).join("")}
+            </div>
+
+            <div class="actions">
+                <button class="primary" id="checkBtn" onclick="checkAnswer(${q.original})"
+                    ${saved ? "disabled" : ""}>
+                    Conferir resposta
+                </button>
+                ${saved ? `<button class="secondary" onclick="showExplanation(${q.original})">Ver explicação</button>` : ""}
+            </div>
+
+            <div class="feedback ${saved ? "show " + (saved.correct ? "right" : "wrong-answer") : ""}"
+                id="feedback">
+                ${saved ? feedbackHTML(q, saved) : ""}
+            </div>
+        </article>
+    `;
+
+    document.getElementById("position").textContent =
+        (current + 1) + " de " + list.length;
+
+    document.getElementById("prevBtn").disabled = current === 0;
+    document.getElementById("nextBtn").disabled = current === list.length - 1;
+
+    document.getElementById("finish").style.display =
+        filter === "all" && Object.keys(answers).length === 45
+        ? "block" : "none";
+
+    if (filter === "all" && Object.keys(answers).length === 45) {
+        const right = Object.values(answers).filter(x => x.correct).length;
+        document.getElementById("finishText").textContent =
+            "Você respondeu às 45 questões e acertou " + right +
+            ". Seu aproveitamento foi de " + Math.round(right/45*100) +
+            "%. Continue revisando os assuntos que causaram dúvidas!";
+    }
+}
+
+function feedbackHTML(q, saved) {
+    const letter = String.fromCharCode(65 + q.a);
+    return `
+        <strong>${saved.correct ? "✓ Muito bem! Você acertou!" : "✦ Vamos aprender com essa questão!"}</strong>
+        ${saved.correct ? "" : "A alternativa correta é " + letter + ". "}
+        <br><br><strong>Resolução:</strong>
+        ${q.e}
+    `;
+}
+
+function checkAnswer(index) {
+    const selected = document.querySelector('input[name="answer"]:checked');
+
+    if (!selected) {
+        alert("Escolha uma alternativa antes de conferir.");
+        return;
+    }
+
+    const choice = Number(selected.value);
+    const correct = choice === questions[index].a;
+
+    answers[index] = {
+        selected: choice,
+        correct: correct
+    };
+
+    save();
+    render();
+}
+
+function showExplanation(index) {
+    const list = getFiltered();
+    const q = list[current];
+
+    const feedback = document.getElementById("feedback");
+    feedback.classList.add("show");
+    feedback.innerHTML = feedbackHTML(q, answers[index]);
+}
+
+function moveQuestion(direction) {
+    current += direction;
+    render();
+    window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+document.querySelectorAll(".filters button").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll(".filters button")
+            .forEach(b => b.classList.remove("active"));
+
+        button.classList.add("active");
+        filter = button.dataset.filter;
+        current = 0;
+        render();
+    });
+});
+
+function restartQuiz() {
+    if (!confirm("Deseja apagar todas as respostas e começar novamente?")) return;
+    answers = {};
+    save();
+    filter = "all";
+    current = 0;
+
+    document.querySelectorAll(".filters button")
+        .forEach(b => b.classList.remove("active"));
+
+    document.querySelector('[data-filter="all"]').classList.add("active");
+    render();
+}
+
+function resetProgress() {
+    restartQuiz();
+}
+
+updateStats();
+render();
+</script>
+
+</body>
+</html>
