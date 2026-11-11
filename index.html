@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>meuENEM | Evelyn e Andrea</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+    --purple: #8065C9;
+    --light-purple: #F0EBFC;
+    --dark: #302B40;
+    --muted: #9690A3;
+    --bg: #F8F7FC;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+}
+
+.container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 35px 22px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-family: 'Plus Jakarta Sans';
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--purple);
+}
+
+.logo span { color: var(--dark); }
+
+.header-tag {
+    background: var(--light-purple);
+    color: var(--purple);
+    padding: 9px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.hero {
+    background: linear-gradient(120deg,#8065C9,#A991E5);
+    color: white;
+    padding: 36px;
+    border-radius: 22px;
+    margin-bottom: 23px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-family: 'Plus Jakarta Sans';
+    font-size: 29px;
+    margin-bottom: 9px;
+}
+
+.hero p {
+    font-size: 14px;
+    opacity: .9;
+    max-width: 470px;
+    line-height: 1.6;
+}
+
+.hero-decoration {
+    position: absolute;
+    right: 35px;
+    top: 8px;
+    font-size: 90px;
+    opacity: .17;
+}
+
+.progress-card, .card {
+    background: white;
+    border: 1px solid #EEEAF5;
+    padding: 24px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px #302B4008;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+
+.progress-info span:last-child {
+    color: var(--purple);
+}
+
+.progress-bar {
+    height: 11px;
+    background: #EEEAF5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg,#8065C9,#B49DEB);
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.stats {
+    display: flex;
+    gap: 35px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.stats strong {
+    display: block;
+    font-size: 21px;
+    color: var(--purple);
+}
+
+.stats small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.section-title {
+    font-family: 'Plus Jakarta Sans';
+    font-size: 21px;
+    margin: 32px 0 16px;
+}
+
+.legend {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.priority {
+    font-size: 9px;
+    font-weight: 800;
+    padding: 6px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.high {
+    background: #E5F5EC;
+    color: #25845B;
+}
+
+.medium {
+    background: #FFF2D9;
+    color: #A36B17;
+}
+
+.low {
+    background: #F0EDF5;
+    color: #817A91;
+}
+
+.card h3 {
+    font-family: 'Plus Jakarta Sans';
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.description {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 17px;
+}
+
+.topic {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 3px;
+    border-bottom: 1px solid #F1EFF5;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.topic:last-child { border: none; }
+
+.topic input {
+    width: 19px;
+    height: 19px;
+    accent-color: var(--purple);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.topic span { flex: 1; }
+
+.topic:has(input:checked) span {
+    text-decoration: line-through;
+    color: #AAA5B5;
+}
+
+.topic:has(input:checked) .priority {
+    opacity: .5;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    color: var(--purple);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ÁREA PERSONALIZADA */
+
+.journey {
+    margin-top: 38px;
+}
+
+.journey h2 {
+    font-family: 'Plus Jakarta Sans';
+    font-size: 22px;
+    color: var(--purple);
+}
+
+.journey-subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 8px 0 20px;
+    line-height: 1.6;
+}
+
+.students {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.student {
+    padding: 25px;
+    border-radius: 19px;
+    background: white;
+    border: 1px solid #EEEAF5;
+    box-shadow: 0 5px 20px #302B4008;
+}
+
+.evelyn {
+    border-top: 5px solid #A58BE0;
+}
+
+.andrea {
+    border-top: 5px solid #D98BAE;
+}
+
+.student-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.student-emoji { font-size: 27px; }
+
+.student-tag {
+    font-size: 9px;
+    font-weight: 800;
+    background: #F0EBFC;
+    color: #8065C9;
+    padding: 7px 10px;
+    border-radius: 20px;
+}
+
+.student h3 {
+    font-size: 23px;
+    margin-bottom: 5px;
+}
+
+.student h4 {
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.student p {
+    font-size: 12px;
+    color: #898397;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.student strong {
+    font-size: 12px;
+}
+
+.student ul {
+    padding-left: 18px;
+    margin: 12px 0;
+}
+
+.student li {
+    font-size: 12px;
+    padding: 5px 0;
+    color: #696378;
+}
+
+.motivation {
+    background: #F7F4FC;
+    padding: 14px;
+    border-radius: 12px;
+    color: #8065C9;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+.andrea .motivation {
+    background: #FCF2F6;
+    color: #B65C83;
+}
+
+.team-message {
+    margin-top: 20px;
+    padding: 27px;
+    background: #EEE9FA;
+    border-radius: 17px;
+    text-align: center;
+    color: #69558F;
+}
+
+.team-message h3 {
+    font-family: 'Plus Jakarta Sans';
+}
+
+.team-message p {
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 10px 0;
+}
+
+.reset {
+    background: white;
+    color: var(--purple);
+    border: 1px solid #DCD3F1;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.reset:hover { background: var(--light-purple); }
+
+footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 25px;
+}
+
+@media(max-width:650px) {
+    .container { padding: 22px 13px; }
+    .hero h1 { font-size: 23px; }
+    .hero-decoration { font-size: 65px; right: 10px; }
+    .students { grid-template-columns: 1fr; }
+    .stats { gap: 20px; }
+    .topic { flex-wrap: wrap; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <div class="logo">meu<span>ENEM.</span></div>
+    <div class="header-tag">✦ PROJETO APROVAÇÃO</div>
+</header>
+
+<section class="hero">
+    <div class="hero-decoration">✦</div>
+    <h1>Seu futuro começa aqui!</h1>
+    <p>
+        Duas estudantes, um objetivo e muitos sonhos.
+        Organize seus estudos e acompanhe cada conquista!
+    </p>
+</section>
+
+<section class="progress-card">
+    <div class="progress-info">
+        <span>Progresso geral dos estudos</span>
+        <span id="percent">0%</span>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="bar"></div>
+    </div>
+
+    <div class="stats">
+        <div><strong id="done">0</strong><small>Concluídos</small></div>
+        <div><strong id="left">0</strong><small>Pendentes</small></div>
+        <div><strong id="total">0</strong><small>Total</small></div>
+    </div>
+</section>
+
+<h2 class="section-title">✦ Legenda de prioridades</h2>
+
+<div class="legend">
+    <span class="priority high">ALTA PRIORIDADE</span>
+    <span class="priority medium">MÉDIA PRIORIDADE</span>
+    <span class="priority low">COMPLEMENTAR</span>
+</div>
+
+<h2 class="section-title">📐 Matemática e suas tecnologias</h2>
+<div id="math"></div>
+
+<h2 class="section-title">🔬 Ciências da Natureza</h2>
+<div id="nature"></div>
+
+<!-- JORNADA DAS DUAS -->
+
+<section class="journey">
+    <h2>✦ Nossa jornada até a aprovação</h2>
+    <p class="journey-subtitle">
+        Cada uma tem seu ritmo, suas dificuldades e suas conquistas.
+        O importante é continuar!
+    </p>
+
+    <div class="students">
+
+        <div class="student evelyn">
+            <div class="student-top">
+                <span class="student-emoji">🌷</span>
+                <span class="student-tag">FOCO PRINCIPAL</span>
+            </div>
+
+            <h3>Evelyn</h3>
+            <h4>Construindo a base matemática!</h4>
+
+            <p>
+                Seu objetivo é fortalecer a matemática básica.
+                Não tenha pressa: entender os fundamentos é mais
+                importante do que decorar fórmulas.
+            </p>
+
+            <strong>Suas prioridades:</strong>
+
+            <ul>
+                <li>Operações básicas</li>
+                <li>Frações e números decimais</li>
+                <li>Potenciação e radiciação</li>
+                <li>MMC e MDC</li>
+                <li>Razão e proporção</li>
+                <li>Regra de três</li>
+                <li>Porcentagem</li>
+                <li>Interpretação de problemas</li>
+            </ul>
+
+            <div class="motivation">
+                "Você não precisa saber tudo agora.
+                Precisa apenas continuar aprendendo.
+                Cada questão resolvida é uma conquista!"
+            </div>
+        </div>
+
+        <div class="student andrea">
+            <div class="student-top">
+                <span class="student-emoji">🦋</span>
+                <span class="student-tag">FOCO PRINCIPAL</span>
+            </div>
+
+            <h3>Andrea</h3>
+            <h4>Dominando a álgebra!</h4>
+
+            <p>
+                Seu objetivo é revisar os fundamentos e aprofundar
+                os conhecimentos algébricos. Pratique, resolva
+                questões e identifique o que precisa de atenção.
+            </p>
+
+            <strong>Suas prioridades:</strong>
+
+            <ul>
+                <li>Expressões algébricas</li>
+                <li>Equações do 1º grau</li>
+                <li>Equações do 2º grau</li>
+                <li>Produtos notáveis</li>
+                <li>Fatoração</li>
+                <li>Sistemas de equações</li>
+                <li>Função afim</li>
+                <li>Função quadrática</li>
+                <li>Progressões (PA e PG)</li>
+            </ul>
+
+            <div class="motivation">
+                "Revisar é fortalecer o que você já sabe.
+                Praticar é descobrir até onde pode chegar.
+                Confie no seu processo!"
+            </div>
+        </div>
+
+    </div>
+
+    <div class="team-message">
+        <h3>💜 Um objetivo em comum</h3>
+        <p>
+            A aprovação não acontece de uma hora para outra.
+            Cada assunto estudado, cada questão resolvida e
+            cada dificuldade superada fazem parte da conquista.
+        </p>
+        <strong>Vamos juntas até a universidade!</strong>
+    </div>
+</section>
+
+<div style="text-align:right; margin-top:20px;">
+    <button class="reset" onclick="resetProgress()">
+        ↻ Reiniciar checklist
+    </button>
+</div>
+
+<footer>
+    Feito com dedicação para Evelyn e Andrea ✦
+    <br><br>
+    A aprovação de vocês começa com o próximo passo.
+</footer>
+
+</div>
+
+<script>
+
+const subjects = [
+
+{
+area:"math",
+name:"Matemática básica",
+desc:"Fundamentos essenciais para resolver questões.",
+topics:[
+["Operações básicas","high"],
+["Frações e números decimais","high"],
+["Potenciação e radiciação","medium"],
+["Múltiplos e divisores","medium"],
+["MMC e MDC","medium"],
+["Razão e proporção","high"],
+["Regra de três simples e composta","high"],
+["Porcentagem","high"],
+["Juros simples e compostos","medium"],
+["Escalas e conversão de unidades","high"]
+]},
+
+{
+area:"math",
+name:"Álgebra e funções",
+desc:"Equações, gráficos e relações matemáticas.",
+topics:[
+["Expressões algébricas","high"],
+["Equação do 1º grau","high"],
+["Equação do 2º grau","high"],
+["Sistemas de equações","medium"],
+["Produtos notáveis","medium"],
+["Fatoração","medium"],
+["Função afim","high"],
+["Função quadrática","high"],
+["Função exponencial","medium"],
+["Função logarítmica","medium"],
+["Progressão aritmética (PA)","medium"],
+["Progressão geométrica (PG)","medium"]
+]},
+
+{
+area:"math",
+name:"Geometria",
+desc:"Formas, medidas e espaço.",
+topics:[
+["Geometria plana","high"],
+["Área e perímetro","high"],
+["Triângulos e quadriláteros","high"],
+["Teorema de Pitágoras","high"],
+["Semelhança de triângulos","medium"],
+["Geometria espacial","high"],
+["Volume de sólidos","high"],
+["Cilindros, cones e esferas","medium"],
+["Geometria analítica","low"]
+]},
+
+{
+area:"math",
+name:"Estatística e probabilidade",
+desc:"Interpretação de dados e análise.",
+topics:[
+["Leitura e interpretação de gráficos","high"],
+["Interpretação de tabelas","high"],
+["Média aritmética e ponderada","high"],
+["Moda e mediana","high"],
+["Probabilidade","high"],
+["Análise combinatória","medium"]
+]},
+
+{
+area:"nature",
+name:"Biologia",
+desc:"Vida, organismos e meio ambiente.",
+topics:[
+["Ecologia e impactos ambientais","high"],
+["Cadeias e teias alimentares","high"],
+["Ciclos biogeoquímicos","medium"],
+["Biomas brasileiros","high"],
+["Citologia e organelas","medium"],
+["Membrana plasmática","medium"],
+["Divisão celular","medium"],
+["Metabolismo energético","medium"],
+["Genética e hereditariedade","high"],
+["DNA e RNA","medium"],
+["Evolução","medium"],
+["Fisiologia humana","high"],
+["Sistema digestório","medium"],
+["Sistema circulatório","medium"],
+["Sistema nervoso e endócrino","medium"],
+["Imunologia e doenças","high"],
+["Botânica","medium"],
+["Microbiologia","medium"]
+]},
+
+{
+area:"nature",
+name:"Química",
+desc:"Matéria, substâncias e transformações.",
+topics:[
+["Modelos atômicos","medium"],
+["Tabela periódica","high"],
+["Ligações químicas","high"],
+["Funções inorgânicas","high"],
+["Reações químicas","high"],
+["Balanceamento de equações","medium"],
+["Estequiometria","high"],
+["Soluções e concentração","high"],
+["Ácidos, bases e pH","high"],
+["Termoquímica","high"],
+["Cinética química","medium"],
+["Equilíbrio químico","medium"],
+["Eletroquímica","high"],
+["Química orgânica","high"],
+["Isomeria","medium"],
+["Polímeros","low"],
+["Química ambiental","high"]
+]},
+
+{
+area:"nature",
+name:"Física",
+desc:"Movimento, energia e fenômenos naturais.",
+topics:[
+["Grandezas e unidades","high"],
+["Cinemática","high"],
+["Movimento uniforme e variado","high"],
+["Leis de Newton","high"],
+["Força e atrito","medium"],
+["Trabalho e energia","high"],
+["Potência","medium"],
+["Hidrostática","medium"],
+["Termologia e calorimetria","high"],
+["Termodinâmica","medium"],
+["Ondulatória","high"],
+["Acústica","medium"],
+["Óptica","high"],
+["Espelhos e lentes","medium"],
+["Eletrostática","medium"],
+["Eletrodinâmica","high"],
+["Resistores e circuitos","high"],
+["Magnetismo","medium"]
+]}
+
+];
+
+function createCards() {
+
+    subjects.forEach((subject,index) => {
+
+        const container = document.getElementById(subject.area);
+
+        const card = document.createElement('section');
+        card.className = 'card';
+        card.dataset.subject = index;
+
+        let html = `
+            <h3>${subject.name}</h3>
+            <p class="description">${subject.desc}</p>
+        `;
+
+        subject.topics.forEach((topic,i) => {
+
+            const id = `subject-${index}-topic-${i}`;
+
+            const labels = {
+                high:"ALTA PRIORIDADE",
+                medium:"MÉDIA PRIORIDADE",
+                low:"COMPLEMENTAR"
+            };
+
+            html += `
+                <label class="topic" for="${id}">
+                    <input type="checkbox" id="${id}">
+                    <span>${topic[0]}</span>
+                    <small class="priority ${topic[1]}">
+                        ${labels[topic[1]]}
+                    </small>
+                </label>
+            `;
+        });
+
+        html += `
+            <div class="card-footer">
+                <span>Seu progresso</span>
+                <span class="subject-count">
+                    0/${subject.topics.length}
+                </span>
+            </div>
+        `;
+
+        card.innerHTML = html;
+        container.appendChild(card);
+
+    });
+
+}
+
+createCards();
+
+const boxes = [
+    ...document.querySelectorAll('input[type="checkbox"]')
+];
+
+function update() {
+
+    const done = boxes.filter(box => box.checked).length;
+    const total = boxes.length;
+
+    const percent = Math.round(done / total * 100);
+
+    document.getElementById('done').textContent = done;
+    document.getElementById('left').textContent = total - done;
+    document.getElementById('total').textContent = total;
+    document.getElementById('percent').textContent = percent + '%';
+
+    document.getElementById('bar').style.width = percent + '%';
+
+    document.querySelectorAll('.card').forEach(card => {
+
+        const inputs = [...card.querySelectorAll('input')];
+
+        const completed = inputs.filter(input => input.checked).length;
+
+        card.querySelector('.subject-count').textContent =
+            `${completed}/${inputs.length}`;
+
+    });
+
+    localStorage.setItem(
+        'enem-evelyn-andrea',
+        JSON.stringify(boxes.map(box => box.checked))
+    );
+
+}
+
+const saved = JSON.parse(
+    localStorage.getItem('enem-evelyn-andrea') || 'null'
+);
+
+if(saved) {
+    boxes.forEach((box,index) => {
+        box.checked = saved[index] || false;
+    });
+}
+
+boxes.forEach(box => {
+    box.addEventListener('change',update);
+});
+
+function resetProgress() {
+
+    if(confirm('Tem certeza que deseja desmarcar todos os assuntos?')) {
+
+        boxes.forEach(box => {
+            box.checked = false;
+        });
+
+        update();
+
+    }
+
+}
+
+update();
+
+</script>
+
+</body>
+</html>
